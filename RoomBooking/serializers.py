@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Room, OccupiedDate
-from django.contrib.auth.models import User
+from .models import User
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

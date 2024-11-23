@@ -6,7 +6,7 @@ from rest_framework import mixins,generics
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import AuthenticationFailed
 

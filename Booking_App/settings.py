@@ -144,5 +144,5 @@ REST_FRAMEWORK = {
          'rest_framework.authentication.TokenAuthentication',
     ],
 }
-# AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend',
-#                            'django.contrib.auth.backends.ModelBackend']
+AUTH_USER_MODEL = 'RoomBooking.User' #updated
+AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
