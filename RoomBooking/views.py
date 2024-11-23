@@ -1,13 +1,14 @@
 from rest_framework.views import APIView
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
-from rest_framework import status
 from rest_framework import mixins,generics
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
+
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from rest_framework.exceptions import AuthenticationFailed
 
 from .models import Room,OccupiedDate
 from .serializers import RoomSerializer,OccupiedDateSerializer,UserSerializer
@@ -38,13 +39,11 @@ class RoomDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminOrReadOnly]
 
 
-
-
 class OccupiedDatesList(generics.ListCreateAPIView):
     queryset = OccupiedDate.objects.all()
     serializer_class = OccupiedDateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
+    
 
 class OccupiedDatesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = OccupiedDate.objects.all()
@@ -54,11 +53,28 @@ class OccupiedDatesDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff or user.is_superuser:  # Admin users
+            return User.objects.all()
+        else:  # Regular users
+            return User.objects.filter(id=user.id)
     
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_object(self):
+        user = self.request.user
+        obj = super().get_object()
+
+        # Allow access if the user is fetching their own details or is an admin
+        if obj == user or user.is_staff or user.is_superuser:
+            return obj
+        else:
+            raise permissions.PermissionDenied("You do not have permission to access this user's details.")
     
 class Register(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -85,27 +101,34 @@ class Register(generics.CreateAPIView):
         response = super().create(request, *args, **kwargs)
         return Response(self.response_data)
     
-    # def create(self, request, *args, **kwargs):
-    #     super().create(request, *args, **kwargs)
-    #     user = User.objects.get(username=request.data['username'])
-    #     user.set_password(request.data['password'])
-    #     user.save()
-    #     token, created = Token.objects.get_or_create(user=user)
-
-    #     # Customize the response to include the token
-    #     response_data = {
-    #         'user': self.serializer_class(user).data,
-    #         'token': token.key,
-    #     }
-        
-    #     return Response(response_data, status=status.HTTP_201_CREATED)
-        
         
     
-class Login(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class Login(APIView):
+    def post(self, request, *args, **kwargs):
+        # Extract username and password from the request data
+        username = request.data.get('username')
+        password = request.data.get('password')
 
+        # Authenticate the user
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            # Raise an error if authentication fails
+            raise AuthenticationFailed('Invalid username or password')
+
+        # Generate or retrieve the token
+        token, created = Token.objects.get_or_create(user=user)
+
+        # Return the user info and token
+        return Response({
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+            },
+            "token": token.key,
+        })
+    
 class TestToken(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
