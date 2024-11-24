@@ -14,11 +14,8 @@ class RoomImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomImage
         fields = ['id', 'image', 'caption','room',]
-class RoomSerializer(serializers.HyperlinkedModelSerializer):
-    images = RoomImageSerializer(many=True, read_only=True)
-    class Meta:
-        model = Room
-        fields = ['url', 'id', 'name', 'type', 'pricePerNight', 'currency', 'maxOccupancy', 'description','images']
+
+
 
 
 class OccupiedDateSerializer(serializers.HyperlinkedModelSerializer):
@@ -34,6 +31,17 @@ class OccupiedDateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OccupiedDate
         fields = ['url', 'id', 'room', 'user', 'date']
+
+
+class RoomSerializer(serializers.HyperlinkedModelSerializer):
+    occupiedDates = OccupiedDateSerializer(many=True,read_only=True)
+    images = RoomImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Room
+        fields = ['url', 'id', 'name', 'type', 'pricePerNight', 'currency', 'maxOccupancy','occupiedDates', 'description','images']
+
+
+
 
 
 from django.contrib.auth.hashers import make_password

@@ -35,7 +35,7 @@ class RoomImage(models.Model):
         return f"Image for {self.room.name} - {self.caption or 'No Caption'}"
 
 class OccupiedDate(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='occupied_dates')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='occupiedDates')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='booked_dates')
     date = models.DateField()
 
