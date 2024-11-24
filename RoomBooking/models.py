@@ -34,3 +34,4 @@ class OccupiedDate(models.Model):
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    full_name = models.CharField(max_length=100,default="")

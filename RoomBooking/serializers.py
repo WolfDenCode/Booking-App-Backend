@@ -27,8 +27,8 @@ from django.contrib.auth.hashers import make_password
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'id', 'username','password','email']
+        fields = ['url', 'id', 'username','password','email','full_name']
 
-      # Hash the password before saving
+      # Hash the password before saving     
     def validate_password(self, value):
         return make_password(value)

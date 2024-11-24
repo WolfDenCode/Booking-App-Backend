@@ -91,14 +91,15 @@ class Register(generics.CreateAPIView):
         self.response_data = {
             "user": {
                 "id": user.id,
-                "username": user.username,
+                "username": user.email,
                 "email": user.email,
+                "full_name":user.full_name
             },
             "token": token.key,
         }
 
     def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
+        super().create(request, *args, **kwargs)
         return Response(self.response_data)
     
         
