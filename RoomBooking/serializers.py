@@ -11,11 +11,11 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
 class OccupiedDateSerializer(serializers.HyperlinkedModelSerializer):
     room = serializers.HyperlinkedRelatedField(
         view_name='room-detail',
-        read_only=True
+        queryset=Room.objects.all()
     )
     user = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
-        read_only=True
+        queryset=User.objects.all()
     )
 
     class Meta:
