@@ -146,3 +146,8 @@ REST_FRAMEWORK = {
 }
 AUTH_USER_MODEL = 'RoomBooking.User' #updated
 AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
+
+import os
+
+MEDIA_URL = '/media/'  # URL path for media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files

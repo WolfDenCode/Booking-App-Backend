@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 
 from .models import User
 from django.contrib.auth import authenticate
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed,PermissionDenied
 
 from .models import Room,OccupiedDate
 from .serializers import RoomSerializer,OccupiedDateSerializer,UserSerializer
@@ -30,6 +30,7 @@ class RoomList(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     permission_classes = [IsAdminOrReadOnly]
+    
 
 
 
