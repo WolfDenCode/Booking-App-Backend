@@ -11,8 +11,8 @@ class Room(models.Model):
         ('deluxe', 'Deluxe Room'),
     ]
     CURRENCY_TYPES = [
-        ('usa_dollar', 'USD'),
-        ('euro', 'EUR'),
+        ('USD', 'USD'),
+        ('USD', 'EUR'),
     ]
     name = models.CharField(max_length=100, blank=True, default='')
     type = models.CharField(max_length=100, choices=ROOM_TYPES)
