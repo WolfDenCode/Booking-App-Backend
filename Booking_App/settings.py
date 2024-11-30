@@ -139,8 +139,8 @@ AUTH_USER_MODEL = 'RoomBooking.User' #updated
 AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5173",
-    "http://localhost:5173",
+    # "http://127.0.0.1:5173",
+    # "http://localhost:5173",
     "https://booking-app-nine-lac.vercel.app"
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -167,8 +167,12 @@ CLOUDINARY_STORAGE = {
 
 # Media files (uploads)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-#MEDIA_URL = ""
+MEDIA_URL = ""
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://booking-app-backend-4vb9.onrender.com',
+    'https://booking-app-nine-lac.vercel.app',
+]
 # Keep STATIC_URL for static files (not Cloudinary-related)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
