@@ -159,11 +159,17 @@ import cloudinary
 import cloudinary.api
 import cloudinary.uploader
 # Cloudinary configuration
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dxbm4jutk',
-    'API_KEY': '154477864673916',
-    'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
-}
+cloudinary.config(
+    cloud_name="dxbm4jutk",
+    api_key="154477864673916",
+    api_secret="JepRjLTqD_kDGP6XN-jjYFjKK3U",
+    secure=True,
+)
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dxbm4jutk',
+#     'API_KEY': '154477864673916',
+#     'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
+# }
 
 # # Media files (uploads)
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
