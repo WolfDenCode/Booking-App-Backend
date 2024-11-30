@@ -53,16 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5173",
-    "http://localhost:5173",
-]
-CORS_ALLOW_CREDENTIALS = True
-CORS_EXPOSE_HEADERS = [
-    "Content-Type",
-    "Authorization",
-]
-ROOT_URLCONF = 'Booking_App.urls'
+
 
 TEMPLATES = [
     {
@@ -136,22 +127,35 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 }
 AUTH_USER_MODEL = 'RoomBooking.User' #updated
 AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = [
+    "Content-Type",
+    "Authorization",
+]
+ROOT_URLCONF = 'Booking_App.urls'
 import os
 
 MEDIA_URL = '/media/'  # URL path for media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
 
 import dj_database_url
-DATABASES['default'] = dj_database_url.parse("postgresql://django_booking_app_user:vCUYwleZprerBhacpOw690UXfjfznpx2@dpg-ct5effpopnds73d77em0-a.frankfurt-postgres.render.com/django_booking_app")
-# 
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
+
+
+DEBUG = os.environ.get("DEBUG","False").lower() == "true"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+SECRET_KEY = os.environ.get("SECRET_KEY")
