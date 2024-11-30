@@ -166,11 +166,12 @@ cloudinary.config(
     api_secret="JepRjLTqD_kDGP6XN-jjYFjKK3U",
     secure=True,
 )
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'dxbm4jutk',
-#     'API_KEY': '154477864673916',
-#     'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
-# }
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxbm4jutk',
+    'API_KEY': '154477864673916',
+    'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
+}
 
 # # Media files (uploads)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
