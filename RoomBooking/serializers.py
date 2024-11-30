@@ -11,6 +11,12 @@ class RoomImageSerializer(serializers.ModelSerializer):
         view_name='room-detail',
         queryset=Room.objects.all()
     )
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return obj.image.url  # Ensures the full URL is returned
+
+    
     class Meta:
         model = RoomImage
         fields = ['id', 'image', 'caption','room',]

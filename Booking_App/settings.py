@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fca+(383w*r4(u+nb$=uclv&cbmp6jdu%=dubygp@84tk-!=rf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -138,6 +138,10 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'RoomBooking.User' #updated
 AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://booking-app-backend-4vb9.onrender.com',
+    'https://booking-app-nine-lac.vercel.app',
+]
 CORS_ALLOWED_ORIGINS = [
     # "http://127.0.0.1:5173",
     # "http://localhost:5173",
@@ -173,14 +177,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
 }
 
-# # Media files (uploads)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-# MEDIA_URL = ""
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://booking-app-backend-4vb9.onrender.com',
-    'https://booking-app-nine-lac.vercel.app',
-]
+
 
 import dj_database_url
 database_url = os.environ.get("DATABASE_URL")
