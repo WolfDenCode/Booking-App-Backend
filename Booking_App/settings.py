@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
     "corsheaders",
     'rest_framework',
     'rest_framework.authtoken',
@@ -149,8 +151,25 @@ CORS_EXPOSE_HEADERS = [
 ROOT_URLCONF = 'Booking_App.urls'
 import os
 
-MEDIA_URL = '/media/'  # URL path for media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
+# For offline serving:
+# MEDIA_URL = '/media/'  # URL path for media files
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
+
+# Cloudinary configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxbm4jutk',
+    'API_KEY': '154477864673916',
+    'API_SECRET': 'JepRjLTqD_kDGP6XN-jjYFjKK3U',
+}
+
+# Media files (uploads)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = 'https://res.cloudinary.com/dxbm4jutk/media/'
+
+# Keep STATIC_URL for static files (not Cloudinary-related)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 import dj_database_url
 database_url = os.environ.get("DATABASE_URL")
