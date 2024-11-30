@@ -158,6 +158,7 @@ import os
 import cloudinary
 import cloudinary.api
 import cloudinary.uploader
+
 # Cloudinary configuration
 cloudinary.config(
     cloud_name="dxbm4jutk",
@@ -172,7 +173,7 @@ cloudinary.config(
 # }
 
 # # Media files (uploads)
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # MEDIA_URL = ""
 
 CSRF_TRUSTED_ORIGINS = [
