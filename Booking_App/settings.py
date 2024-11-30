@@ -155,6 +155,9 @@ import os
 # MEDIA_URL = '/media/'  # URL path for media files
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
 
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
 # Cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dxbm4jutk',
@@ -164,7 +167,7 @@ CLOUDINARY_STORAGE = {
 
 # Media files (uploads)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
+MEDIA_URL = ""
 
 # Keep STATIC_URL for static files (not Cloudinary-related)
 STATIC_URL = '/static/'

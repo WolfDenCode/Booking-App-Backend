@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings 
 
-
+from cloudinary.models import CloudinaryField
     
 class Room(models.Model):
     ROOM_TYPES = [
@@ -27,7 +27,8 @@ class Room(models.Model):
         return f"{self.name} ({self.type})"
     
 class RoomImage(models.Model):
-    image = models.ImageField(upload_to='room_images/')
+    # image = models.ImageField(upload_to='room_images/')
+    image = CloudinaryField("image")
     caption = models.CharField(max_length=255, blank=True, null=True)
     room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
     
