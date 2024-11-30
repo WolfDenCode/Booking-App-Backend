@@ -151,3 +151,7 @@ import os
 
 MEDIA_URL = '/media/'  # URL path for media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.parse("postgresql://django_booking_app_user:vCUYwleZprerBhacpOw690UXfjfznpx2@dpg-ct5effpopnds73d77em0-a.frankfurt-postgres.render.com/django_booking_app")
+# 
