@@ -27,8 +27,8 @@ class Room(models.Model):
         return f"{self.name} ({self.type})"
     
 class RoomImage(models.Model):
-    image = models.ImageField(upload_to='room_images/')
-    #image = CloudinaryField("image")
+    #image = models.ImageField(upload_to='room_images/')
+    image = CloudinaryField("image")
     caption = models.CharField(max_length=255, blank=True, null=True)
     room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
     
