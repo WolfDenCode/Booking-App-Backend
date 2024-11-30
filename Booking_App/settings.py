@@ -139,6 +139,7 @@ AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
+    "https://booking-app-nine-lac.vercel.app"
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_EXPOSE_HEADERS = [
