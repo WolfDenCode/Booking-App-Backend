@@ -139,13 +139,13 @@ AUTH_USER_MODEL = 'RoomBooking.User' #updated
 AUTHENTICATION_BACKENDS = ['RoomBooking.auth_backend.EmailBackend']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://booking-app-backend-4vb9.onrender.com',
-    'https://booking-app-nine-ruby.vercel.app/',
+    'https://booking-app-backend-gqr0.onrender.com',
+    'https://booking-app-nine-ruby.vercel.app',
 ]
 CORS_ALLOWED_ORIGINS = [
     # "http://127.0.0.1:5173",
     # "http://localhost:5173",
-    "https://booking-app-nine-ruby.vercel.app/"
+    "https://booking-app-nine-ruby.vercel.app"
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_EXPOSE_HEADERS = [
